@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragments.AddNoteFragment">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/titleInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@android:color/transparent"
+        android:textColorHint="@color/black_alpha_50"
+        app:boxBackgroundColor="@color/white"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:hintTextColor="@color/black_alpha_50"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/titleInput"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:drawablePadding="12dp"
+            android:ems="10"
+            android:hint="@string/title"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/detailInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true"
+        android:background="@android:color/transparent"
+        android:textColorHint="@color/black_alpha_50"
+        app:boxBackgroundColor="@color/white"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:hintTextColor="@color/black_alpha_50"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleInputLayout"
+        app:layout_constraintVertical_bias="0.0">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/detailInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="12dp"
+            android:ems="10"
+            android:hint="@string/detail"
+            android:inputType="textMultiLine"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+   <!-- <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/detailTextField"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:hint="Start typing..."
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleInputLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>-->
+</androidx.constraintlayout.widget.ConstraintLayout>

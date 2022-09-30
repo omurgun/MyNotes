@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="black_alpha_50">#80000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="note_color_1">#d5c2c6</color>
+    <color name="note_color_1_alpha_50">#80D5C2C6</color>
+    <color name="note_color_2">#efe1e1</color>
+    <color name="note_color_3">#ffe1e1</color>
+    <color name="note_color_4">#ffbbc2</color>
+    <color name="note_color_5">#a8e6cf</color>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <color name="dark_gray">#555555</color>
+    <color name="dark_gray_alpha_50">#80555555</color>
+    <color name="dark_gray_alpha_10">#1A555555</color>
+    <color name="white_alpha_50">#80FFFFFF</color>
+    <color name="white_alpha_90">#E6FFFFFF</color>
+    <color name="white_200">#33FFFFFF</color>
+    <color name="orange">#E97124</color>
+    <color name="orange_300">#C68357</color>
+    <color name="orange_alpha_50">#80C68357</color>
+    <color name="orange_alpha_10">#1AC68357</color>
+    <color name="orange_alpha_20">#33C68357</color>
+    <color name="green">#31CA92</color>
+    <color name="dark_green">#169D28</color>
+    <color name="green_alpha_50">#8031CA92</color>
+    <color name="green_alpha_20">#3331CA92</color>
+    <color name="gray">#EEEEEE</color>
+    <color name="red">#E92524</color>
+    <color name="red_alpha_50">#80E92524</color>
+    <color name="red_100">#4DE92524</color>
+    <color name="lite_gray">#C0C0C0</color>
+    <color name="gray_300">#E9E9E9</color>
+    <color name="gray_400">#707070</color>
+    <color name="transparentColor">#00673AB7</color>
+    <color name="x">#CCFFEEB7</color>
+
+
+</resources>
