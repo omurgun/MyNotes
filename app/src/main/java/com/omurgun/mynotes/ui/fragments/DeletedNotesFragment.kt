@@ -1,17 +1,20 @@
 package com.omurgun.mynotes.ui.fragments
 
 import android.annotation.SuppressLint
+import android.icu.text.SimpleDateFormat
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.omurgun.mynotes.application.constants.ApplicationConstants.NOTE_DELETE_DAY
+import com.omurgun.mynotes.application.constants.ApplicationConstants.ONE_DAY_TIME
 import com.omurgun.mynotes.data.models.entity.EntityMyNote
 import com.omurgun.mynotes.data.models.internal.InternalDate
 import com.omurgun.mynotes.data.models.internal.InternalToolbarItems
@@ -26,7 +29,6 @@ import com.omurgun.mynotes.ui.util.makeVisible
 import com.omurgun.mynotes.ui.viewModel.MyNoteViewModel
 import java.util.*
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 
 class DeletedNotesFragment @Inject constructor(
@@ -173,26 +175,45 @@ class DeletedNotesFragment @Inject constructor(
 
                     if (it.data != null) {
 
-                        val cleanData: ArrayList<EntityMyNote> = arrayListOf()
-                        val dataToBeDeleted: ArrayList<EntityMyNote> = arrayListOf()
-                        val today = Util.smashDate(Util.dateTimeFormatter(Date()))
-                        for (entity in it.data) {
-                            val deletedDate :InternalDate? = Util.smashDate(entity.deletedDate ?: "")
-                            if (deletedDate != null && today != null) {
-                                if (Integer.parseInt(today.day) > Integer.parseInt(deletedDate.day) + NOTE_DELETE_DAY) {
-                                    dataToBeDeleted.add(entity)
-                                }
-                                else {
-                                    cleanData.add(entity)
+                        val noteDeleteDayFromDataStore = myNoteViewModel.getNoteDeleteDayFromDataStore()
+                        val dataObserver = Observer<Int?> { data ->
+                            noteDeleteDayFromDataStore.removeObservers(viewLifecycleOwner)
+
+                            val cleanData: ArrayList<EntityMyNote> = arrayListOf()
+                            val dataToBeDeleted: ArrayList<EntityMyNote> = arrayListOf()
+                            val today = Util.smashDate(Util.dateTimeFormatter(Date()))
+                            for (entity in it.data) {
+                                val deletedDate :InternalDate? = Util.smashDate(entity.deletedDate ?: "")
+                                if (deletedDate != null && today != null) {
+
+                                    val formatter = SimpleDateFormat("yyyy-MM-dd")
+                                    val text = "${Integer.parseInt(deletedDate.year)}-${Integer.parseInt(deletedDate.month)}-${Integer.parseInt(deletedDate.day)}"
+                                    val date : Date = formatter.parse(text)
+                                    val sum : Long = date.time.plus(((data ?: NOTE_DELETE_DAY) * ONE_DAY_TIME))
+                                    val newDate = Date(sum)
+
+                                    if (Date().after(newDate)) {
+                                        dataToBeDeleted.add(entity)
+                                    }
+                                    else {
+                                        cleanData.add(entity)
+                                    }
+
+
                                 }
                             }
+
+                            for (i in dataToBeDeleted) {
+                                deleteNoteFromRoom(i)
+                            }
+
+                            deletedNoteAdapter.deletedNotes = cleanData
+
                         }
 
-                        for (i in dataToBeDeleted) {
-                            deleteNoteFromRoom(i)
-                        }
+                        noteDeleteDayFromDataStore.observe(viewLifecycleOwner,dataObserver)
 
-                        deletedNoteAdapter.deletedNotes = cleanData
+
                     }
                     //binding.movieDetailLoading.makeGone()
                     //binding.movieDetailContainer.makeVisible()

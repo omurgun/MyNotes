@@ -4,4 +4,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title">Title</string>
     <string name="detail">Start typing</string>
+    <string name="seek_bar_value">%1$d/30</string>
 </resources>

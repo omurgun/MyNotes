@@ -6,23 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.omurgun.mynotes.R
 import com.omurgun.mynotes.data.models.internal.InternalItemSetting
 import com.omurgun.mynotes.data.models.internal.InternalToolbarItems
 import com.omurgun.mynotes.databinding.FragmentSettingsBinding
-import com.omurgun.mynotes.databinding.FragmentUpdateNoteBinding
 import com.omurgun.mynotes.ui.activities.HomeActivity
 import com.omurgun.mynotes.ui.adapters.adapterCallBack.ItemClickListener
-import com.omurgun.mynotes.ui.adapters.recyclerViewAdapter.MyNoteAdapter
 import com.omurgun.mynotes.ui.adapters.recyclerViewAdapter.SettingsAdapter
+import com.omurgun.mynotes.ui.dialogs.ChangeLanguageBottomSheetDialogFragment
+import com.omurgun.mynotes.ui.dialogs.ChangeNoteDeleteDayBottomSheetFragment
 import com.omurgun.mynotes.ui.dialogs.ChangeThemeBottomSheetDialogFragment
 import com.omurgun.mynotes.ui.factory.ViewModelFactory
 import com.omurgun.mynotes.ui.util.Util
-import com.omurgun.mynotes.ui.util.makeInVisible
 import com.omurgun.mynotes.ui.viewModel.MyNoteViewModel
 import javax.inject.Inject
 
@@ -34,7 +31,6 @@ class SettingsFragment @Inject constructor(
     private val myNoteViewModel: MyNoteViewModel by viewModels { viewModelFactory }
     private var toolbarItems: InternalToolbarItems? = null
     private val settingsAdapter: SettingsAdapter = SettingsAdapter()
-    private var bottomSheetDialog : ChangeThemeBottomSheetDialogFragment? = null
 
 
     override fun onCreateView(
@@ -60,7 +56,7 @@ class SettingsFragment @Inject constructor(
         settingsAdapter.listener = adapterItemClickListener
 
         settingsAdapter.internalItemSettings = arrayListOf(
-            InternalItemSetting(1,Util.getDrawable(R.drawable.ic_baseline_settings_24,requireContext().theme),"Genel Ayarlar"),
+            InternalItemSetting(1,Util.getDrawable(R.drawable.ic_baseline_settings_24,requireContext().theme),"Silinen Notların Süresi"),
             InternalItemSetting(2,Util.getDrawable(R.drawable.ic_baseline_settings_24,requireContext().theme),"Dili Ayarla"),
             InternalItemSetting(3,Util.getDrawable(R.drawable.ic_baseline_settings_24,requireContext().theme),"Temalar")
 
@@ -68,9 +64,33 @@ class SettingsFragment @Inject constructor(
 
     }
 
-    private fun showBottomSheet() {
-        bottomSheetDialog = ChangeThemeBottomSheetDialogFragment()
-        bottomSheetDialog?.show(requireActivity().supportFragmentManager,"ChangeThemeBottomSheetDialog")
+    private fun showBottomSheetChangeTheme() {
+        val bottomSheetDialog = ChangeThemeBottomSheetDialogFragment()
+        bottomSheetDialog.show(requireActivity().supportFragmentManager,"ChangeThemeBottomSheetDialog")
+    }
+
+    private fun showBottomSheetChangeLanguage() {
+        val bottomSheetDialog = ChangeLanguageBottomSheetDialogFragment()
+        bottomSheetDialog.show(requireActivity().supportFragmentManager,"ChangeLanguageBottomSheetDialog")
+    }
+
+    private fun showBottomSheetChangeNotesDeletedDate() {
+        val bottomSheetDialog = ChangeNoteDeleteDayBottomSheetFragment()
+        val noteDeleteDayFromDataStore = myNoteViewModel.getNoteDeleteDayFromDataStore()
+        val dataObserver = Observer<Int?> { data ->
+            noteDeleteDayFromDataStore.removeObservers(this)
+            bottomSheetDialog.noteDeleteDay.value = data
+            bottomSheetDialog.show(requireActivity().supportFragmentManager,"ChangeNoteDeletedDateBottomSheetDialog")
+        }
+
+        noteDeleteDayFromDataStore.observe(this,dataObserver)
+
+        bottomSheetDialog.noteDeleteDay.observe(viewLifecycleOwner
+        ) { noteDeleteDay ->
+            noteDeleteDay?.let {
+                myNoteViewModel.saveNoteDeleteDayToDataStore(it)
+            }
+        }
     }
 
 
@@ -80,13 +100,13 @@ class SettingsFragment @Inject constructor(
 
             when (internalItemSetting.id) {
                 1 -> {
-                    showBottomSheet()
+                    showBottomSheetChangeNotesDeletedDate()
                 }
                 2 -> {
-                    showBottomSheet()
+                    showBottomSheetChangeLanguage()
                 }
                 3 -> {
-                    showBottomSheet()
+                    showBottomSheetChangeTheme()
                 }
             }
         }

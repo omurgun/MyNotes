@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="20dp"
-    tools:context=".ui.dialogs.ChangeThemeBottomSheetDialogFragment">
+    tools:context=".ui.dialogs.ChangeLanguageBottomSheetDialogFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -35,7 +35,7 @@
             android:layout_marginStart="25dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="25dp"
-            android:text="Tema Değiştir"
+            android:text="Dil Değiştir"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="18sp"
@@ -46,10 +46,9 @@
 
         <RadioGroup
             android:id="@+id/radioGroupBox"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="125dp"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
@@ -67,7 +66,7 @@
                 android:gravity="center"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="8dp"
-                android:text="Tema 1"
+                android:text="Türkçe"
                 android:textColor="@color/radio_flat_text_selector"
                 android:textSize="16sp" />
 
@@ -81,35 +80,11 @@
                 android:gravity="center"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="8dp"
-                android:text="Tema 2"
-                android:textColor="@color/radio_flat_text_selector"
-                android:textSize="16sp" />
-
-            <RadioButton
-                android:id="@+id/radio2"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/radio_flat_selector"
-                android:button="@android:color/transparent"
-                android:checked="false"
-                android:gravity="center"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="8dp"
-                android:text="Tema 3"
+                android:text="English"
                 android:textColor="@color/radio_flat_text_selector"
                 android:textSize="16sp" />
 
         </RadioGroup>
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="125dp"
-            android:src="@color/red"
-            app:layout_constraintBottom_toBottomOf="@+id/radioGroupBox"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/radioGroupBox" />
 
 
         <androidx.appcompat.widget.AppCompatButton
