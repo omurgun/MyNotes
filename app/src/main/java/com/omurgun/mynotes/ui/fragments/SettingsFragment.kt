@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,6 +23,7 @@ import com.omurgun.mynotes.ui.dialogs.ChangeThemeBottomSheetDialogFragment
 import com.omurgun.mynotes.ui.factory.ViewModelFactory
 import com.omurgun.mynotes.ui.util.Util
 import com.omurgun.mynotes.ui.util.makeInVisible
+import com.omurgun.mynotes.ui.viewModel.MyNoteViewModel
 import javax.inject.Inject
 
 class SettingsFragment @Inject constructor(
@@ -29,6 +31,7 @@ class SettingsFragment @Inject constructor(
 ) : Fragment() {
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
+    private val myNoteViewModel: MyNoteViewModel by viewModels { viewModelFactory }
     private var toolbarItems: InternalToolbarItems? = null
     private val settingsAdapter: SettingsAdapter = SettingsAdapter()
     private var bottomSheetDialog : ChangeThemeBottomSheetDialogFragment? = null
@@ -80,15 +83,13 @@ class SettingsFragment @Inject constructor(
                     showBottomSheet()
                 }
                 2 -> {
-
+                    showBottomSheet()
                 }
                 3 -> {
-
+                    showBottomSheet()
                 }
             }
         }
-
-
     }
 
 
