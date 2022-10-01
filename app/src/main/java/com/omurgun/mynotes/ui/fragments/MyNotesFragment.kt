@@ -90,6 +90,7 @@ class MyNotesFragment @Inject constructor(
             toolbarItems?.secondEndButton?.makeInVisible()
             toolbarItems?.trashItemCountText?.makeInVisible()
             toolbarItems?.trashItemCountTextBackgroundView?.makeInVisible()
+            toolbarItems?.endButton?.makeInVisible()
 
             val action = MyNotesFragmentDirections.actionMyNotesFragmentToSettingsFragment()
             findNavController().navigate(action)
