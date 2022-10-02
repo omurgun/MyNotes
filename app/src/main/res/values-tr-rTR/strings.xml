@@ -5,4 +5,8 @@
     <string name="title">Başlık</string>
     <string name="detail">Yazmaya başla</string>
     <string name="seek_bar_value">%1$d/30</string>
+    <string name="my_notes_locked">Notlarım Kilitli</string>
+    <string name="notes_delet_time">Silinen notların süresi</string>
+    <string name="languages">Diller</string>
+    <string name="app_themes">Temalar</string>
 </resources>

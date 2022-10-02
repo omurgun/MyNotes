@@ -6,21 +6,18 @@ import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.DisplayMetrics
-import androidx.activity.viewModels
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.omurgun.mynotes.R
-import com.omurgun.mynotes.application.constants.ApplicationConstants
 import com.omurgun.mynotes.data.local.dataStore.SettingsDataStore
+import com.omurgun.mynotes.data.local.sharedPreferences.CustomSharedPreferences
 import com.omurgun.mynotes.data.models.internal.InternalToolbarItems
 import com.omurgun.mynotes.databinding.ActivityHomeBinding
 import com.omurgun.mynotes.ui.dialogs.CustomDialogManager
 import com.omurgun.mynotes.ui.factory.FragmentFactoryEntryPoint
-import com.omurgun.mynotes.ui.viewModel.MyNoteViewModel
 import com.zeugmasolutions.localehelper.LocaleHelper
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.EntryPointAccessors
@@ -36,6 +33,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityHomeBinding
     private lateinit var customDialogManager : CustomDialogManager
+    private lateinit var customSharedPreferences : CustomSharedPreferences
 
 
     @Inject
@@ -62,6 +60,23 @@ class HomeActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         customDialogManager = CustomDialogManager()
+
+
+        /*settingsDataStore.getLanguage.asLiveData(Dispatchers.IO).observe(this@HomeActivity) {
+            if (it == null) {
+                val lang = Locale.getDefault().language
+
+                if(lang == "tr") {
+                    //super.attachBaseContext(updateResourcesLegacy(newBase, "tr"))
+                }
+                else {
+                    //super.attachBaseContext(updateResourcesLegacy(newBase, "en"))
+                }
+            }
+            else {
+                //super.attachBaseContext(updateResourcesLegacy(newBase, it))
+            }
+        }*/
 
 
     }
@@ -103,39 +118,32 @@ class HomeActivity : AppCompatActivity() {
         val context = super.createConfigurationContext(overrideConfiguration)
         return LocaleHelper.onAttach(context)
     }
-    fun setLanguage(context: Context, lang: String) : Context {
+
+    fun setLanguage(context:Context,lang: String) : Context{
+        customSharedPreferences.saveLanguageToSharedPreferences(lang)
+
         val metrics : DisplayMetrics = applicationContext.resources.displayMetrics
         val configuration : Configuration = applicationContext.resources.configuration
         configuration.setLocale(Locale(lang.split("-")[0]))
         applicationContext.resources.updateConfiguration(configuration, metrics)
         onConfigurationChanged(configuration)
+
         return context
+
     }
 
     override fun attachBaseContext(newBase: Context) {
-        lifecycleScope.launch(Dispatchers.IO) {
-            settingsDataStore.getLanguage.asLiveData(Dispatchers.IO).observe(this@HomeActivity) {
-                launch(Dispatchers.Main) {
-                    if (it == null) {
-                        val lang = Locale.getDefault().language
+        customSharedPreferences = CustomSharedPreferences(newBase.applicationContext)
+        var localeLanguage = Locale.getDefault().language
 
-                        if(lang == "tr") {
-                            super.attachBaseContext(updateResourcesLegacy(newBase, "tr"))
-                        }
-                        else {
-                            super.attachBaseContext(updateResourcesLegacy(newBase, "en"))
-                        }
-                    }
-                    else {
-                        super.attachBaseContext(updateResourcesLegacy(newBase, it))
-                    }
-                }
+        localeLanguage = customSharedPreferences.getLanguageFromSharedPreferences()
+            ?: if (localeLanguage == "tr") {
+                "tr-TR"
+            } else {
+                "en-US"
             }
-        }
 
-        super.attachBaseContext(newBase)
-
-
+        super.attachBaseContext(updateResourcesLegacy(newBase, localeLanguage))
     }
 
     private fun updateResourcesLegacy(context: Context, language: String): Context {
@@ -152,7 +160,7 @@ class HomeActivity : AppCompatActivity() {
             val lang = Locale.getDefault().displayLanguage
             if (lang == "Türkçe")
             {
-                //customSharedPreferences.saveLanguage("tr-TR")
+                customSharedPreferences.saveLanguageToSharedPreferences("tr-TR")
                 val locale = Locale("tr")
                 Locale.setDefault(locale)
                 val resources = context.resources
@@ -163,7 +171,7 @@ class HomeActivity : AppCompatActivity() {
             }
             else
             {
-                //customSharedPreferences.saveLanguage("en-US")
+                customSharedPreferences.saveLanguageToSharedPreferences("en-US")
                 val locale = Locale("en")
                 Locale.setDefault(locale)
                 val resources = context.resources

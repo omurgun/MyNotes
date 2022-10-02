@@ -5,4 +5,8 @@
     <string name="title">Title</string>
     <string name="detail">Start typing</string>
     <string name="seek_bar_value">%1$d/30</string>
+    <string name="my_notes_locked">MyNotes Locked</string>
+    <string name="notes_delet_time">Note delete time</string>
+    <string name="languages">Languages</string>
+    <string name="app_themes">App themes</string>
 </resources>
