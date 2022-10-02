@@ -20,8 +20,8 @@ class ChangeNoteDeleteDayBottomSheetFragment : BottomSheetDialogFragment() {
     private var _binding: FragmentBottomSheetDialogChangeNoteDeleteDayBinding? = null
     private val binding get() = _binding!!
 
-    private var _noteDeleteDay = MutableLiveData<Int>().apply {value = null}
-    var noteDeleteDay = MutableLiveData<Int>()
+    private var _noteDeleteDay = MutableLiveData<Int?>().apply {value = null}
+    var noteDeleteDay = MutableLiveData<Int?>()
 
 
     override fun onStart() {

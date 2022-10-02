@@ -39,10 +39,4 @@ interface MyNoteDao {
     @Delete
     suspend fun deleteNote(note: EntityMyNote) : Int
 
-
-
-
-
-
-
 }

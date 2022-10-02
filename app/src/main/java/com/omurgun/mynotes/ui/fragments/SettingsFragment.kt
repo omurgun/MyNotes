@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.omurgun.mynotes.R
+import com.omurgun.mynotes.application.constants.ApplicationConstants.LANGUAGE_TR
 import com.omurgun.mynotes.data.models.internal.InternalItemSetting
 import com.omurgun.mynotes.data.models.internal.InternalToolbarItems
 import com.omurgun.mynotes.databinding.FragmentSettingsBinding
@@ -66,12 +67,48 @@ class SettingsFragment @Inject constructor(
 
     private fun showBottomSheetChangeTheme() {
         val bottomSheetDialog = ChangeThemeBottomSheetDialogFragment()
-        bottomSheetDialog.show(requireActivity().supportFragmentManager,"ChangeThemeBottomSheetDialog")
+        val appThemeFromDataStore = myNoteViewModel.getThemeFromDataStore()
+        val dataObserver = Observer<Int?> { data ->
+            appThemeFromDataStore.removeObservers(this)
+            bottomSheetDialog.theme.value = data
+            bottomSheetDialog.show(requireActivity().supportFragmentManager,"ChangeThemeBottomSheetDialog")
+        }
+
+        appThemeFromDataStore.observe(this,dataObserver)
+
+        bottomSheetDialog.theme.observe(viewLifecycleOwner
+        ) { theme ->
+            theme?.let {
+                myNoteViewModel.saveThemeToDataStore(it)
+            }
+        }
     }
 
     private fun showBottomSheetChangeLanguage() {
         val bottomSheetDialog = ChangeLanguageBottomSheetDialogFragment()
-        bottomSheetDialog.show(requireActivity().supportFragmentManager,"ChangeLanguageBottomSheetDialog")
+        val languageFromDataStore = myNoteViewModel.getLanguageFromDataStore()
+        val dataObserver = Observer<String?> { data ->
+            languageFromDataStore.removeObservers(this)
+            bottomSheetDialog.language.value = data
+            bottomSheetDialog.show(requireActivity().supportFragmentManager,"ChangeLanguageBottomSheetDialog")
+        }
+
+        languageFromDataStore.observe(this,dataObserver)
+
+        bottomSheetDialog.language.observe(viewLifecycleOwner
+        ) { language ->
+            language?.let {
+                myNoteViewModel.saveLanguageToDataStore(language)
+
+                if (language == LANGUAGE_TR) {
+                    (requireActivity() as HomeActivity).setLanguage(requireContext(),"tr-TR")
+                }
+                else {
+                    (requireActivity() as HomeActivity).setLanguage(requireContext(),"en-US")
+                }
+
+            }
+        }
     }
 
     private fun showBottomSheetChangeNotesDeletedDate() {
