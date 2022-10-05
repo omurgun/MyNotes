@@ -42,7 +42,7 @@
                     android:id="@+id/endButton"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:background="@android:color/transparent"
+                    android:background="@drawable/ripple_1"
                     android:src="@drawable/ic_baseline_settings_24"
                     android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -53,7 +53,8 @@
                     android:id="@+id/secondEndButton"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:background="@android:color/transparent"
+
+                    android:background="@drawable/ripple_1"
                     android:src="@drawable/ic_baseline_restore_from_trash_24"
                     android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="parent"
