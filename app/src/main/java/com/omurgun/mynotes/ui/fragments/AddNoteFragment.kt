@@ -104,24 +104,17 @@ class AddNoteFragment @Inject constructor(
         data.observe(viewLifecycleOwner) {
             when (it) {
                 is ResultData.Loading -> {
-                    println("loading")
-                    //binding.movieDetailContainer.makeInVisible()
-                    //binding.movieDetailLoading.makeVisible()
+                    (requireActivity() as HomeActivity).dialogLoading?.show()
                 }
                 is ResultData.Success -> {
-                    println("Success")
-                    println("data : ${it.data}")
                     hideKeyboard()
                     findNavController().popBackStack()
 
-                    //binding.movieDetailLoading.makeGone()
-                    //binding.movieDetailContainer.makeVisible()
-
+                    (requireActivity() as HomeActivity).dialogLoading?.dismiss()
                 }
                 is ResultData.Exception -> {
-                    println("Exception")
-                    //binding.movieDetailLoading.makeGone()
-                    //binding.movieDetailContainer.makeVisible()
+
+                    (requireActivity() as HomeActivity).dialogLoading?.dismiss()
 
                 }
             }

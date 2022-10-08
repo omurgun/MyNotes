@@ -95,8 +95,4 @@ class MyNoteViewModel @Inject constructor(
     fun getNoteDeleteDayFromDataStore(): LiveData<Int?> {
         return settingsDataStore.getNoteDeleteDay.asLiveData(Dispatchers.IO)
     }
-
-
-
-
 }

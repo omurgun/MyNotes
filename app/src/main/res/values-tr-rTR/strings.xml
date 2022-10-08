@@ -9,4 +9,18 @@
     <string name="notes_delet_time">Silinen notların süresi</string>
     <string name="languages">Diller</string>
     <string name="app_themes">Temalar</string>
+    <string name="yesterday">Dün</string>
+
+    <string name="january">Ocak</string>
+    <string name="february">Şubat</string>
+    <string name="march">Mart</string>
+    <string name="april">Nisan</string>
+    <string name="may">Mayıs</string>
+    <string name="june">Haziran</string>
+    <string name="july">Temmuz</string>
+    <string name="august">Ağustos</string>
+    <string name="september">Eylül</string>
+    <string name="october">Ekim</string>
+    <string name="november">Kasım</string>
+    <string name="december">Aralık</string>
 </resources>

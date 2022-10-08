@@ -1,5 +1,6 @@
 package com.omurgun.mynotes.ui.activities
 
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
@@ -34,6 +35,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var customDialogManager : CustomDialogManager
     private lateinit var customSharedPreferences : CustomSharedPreferences
+    var dialogLoading: Dialog? = null
 
 
     @Inject
@@ -58,25 +60,8 @@ class HomeActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
-
         customDialogManager = CustomDialogManager()
-
-
-        /*settingsDataStore.getLanguage.asLiveData(Dispatchers.IO).observe(this@HomeActivity) {
-            if (it == null) {
-                val lang = Locale.getDefault().language
-
-                if(lang == "tr") {
-                    //super.attachBaseContext(updateResourcesLegacy(newBase, "tr"))
-                }
-                else {
-                    //super.attachBaseContext(updateResourcesLegacy(newBase, "en"))
-                }
-            }
-            else {
-                //super.attachBaseContext(updateResourcesLegacy(newBase, it))
-            }
-        }*/
+        dialogLoading = customDialogManager.showDialogLoading(this)
 
 
     }

@@ -11,7 +11,4 @@ class SettingsViewHolder(private val binding: ItemSettingBinding) : RecyclerView
     ) {
         binding.title.text = internalItemSetting.title
     }
-
-
-
 }

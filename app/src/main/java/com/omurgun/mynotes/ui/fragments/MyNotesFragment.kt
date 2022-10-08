@@ -158,9 +158,7 @@ class MyNotesFragment @Inject constructor(
         data.observe(viewLifecycleOwner) {
             when (it) {
                 is ResultData.Loading -> {
-                    println("loading")
-                    //binding.movieDetailContainer.makeInVisible()
-                    //binding.movieDetailLoading.makeVisible()
+                    (requireActivity() as HomeActivity).dialogLoading?.show()
                 }
                 is ResultData.Success -> {
                     println("Success")
@@ -170,15 +168,10 @@ class MyNotesFragment @Inject constructor(
                     }
 
 
-                    //binding.movieDetailLoading.makeGone()
-                    //binding.movieDetailContainer.makeVisible()
-
+                    (requireActivity() as HomeActivity).dialogLoading?.dismiss()
                 }
                 is ResultData.Exception -> {
-                    println("Exception")
-                    //binding.movieDetailLoading.makeGone()
-                    //binding.movieDetailContainer.makeVisible()
-
+                    (requireActivity() as HomeActivity).dialogLoading?.dismiss()
                 }
             }
         }
@@ -191,9 +184,7 @@ class MyNotesFragment @Inject constructor(
         data.observe(viewLifecycleOwner) {
             when (it) {
                 is ResultData.Loading -> {
-                    println("loading")
-                    //binding.movieDetailContainer.makeInVisible()
-                    //binding.movieDetailLoading.makeVisible()
+                    (requireActivity() as HomeActivity).dialogLoading?.show()
                 }
                 is ResultData.Success -> {
                     println("Success")
@@ -201,15 +192,11 @@ class MyNotesFragment @Inject constructor(
                     if (it.data != null) {
                         myNoteAdapter.myNotes = it.data
                     }
-                    //binding.movieDetailLoading.makeGone()
-                    //binding.movieDetailContainer.makeVisible()
 
+                    (requireActivity() as HomeActivity).dialogLoading?.dismiss()
                 }
                 is ResultData.Exception -> {
-                    println("Exception")
-                    //binding.movieDetailLoading.makeGone()
-                    //binding.movieDetailContainer.makeVisible()
-
+                    (requireActivity() as HomeActivity).dialogLoading?.dismiss()
                 }
             }
         }
@@ -222,9 +209,7 @@ class MyNotesFragment @Inject constructor(
         data.observe(viewLifecycleOwner) {
             when (it) {
                 is ResultData.Loading -> {
-                    println("loading")
-                    //binding.movieDetailContainer.makeInVisible()
-                    //binding.movieDetailLoading.makeVisible()
+                    (requireActivity() as HomeActivity).dialogLoading?.show()
                 }
                 is ResultData.Success -> {
                     println("Success")
@@ -233,15 +218,12 @@ class MyNotesFragment @Inject constructor(
                     newList.remove(note)
                     myNoteAdapter.myNotes = newList
 
-                    //binding.movieDetailLoading.makeGone()
-                    //binding.movieDetailContainer.makeVisible()
-
+                    (requireActivity() as HomeActivity).dialogLoading?.dismiss()
                 }
                 is ResultData.Exception -> {
-                    println("Exception")
-                    //binding.movieDetailLoading.makeGone()
-                    //binding.movieDetailContainer.makeVisible()
 
+
+                    (requireActivity() as HomeActivity).dialogLoading?.dismiss()
                 }
             }
         }
@@ -254,9 +236,7 @@ class MyNotesFragment @Inject constructor(
         data.observe(viewLifecycleOwner) {
             when (it) {
                 is ResultData.Loading -> {
-                    println("loading")
-                    //binding.movieDetailContainer.makeInVisible()
-                    //binding.movieDetailLoading.makeVisible()
+                    (requireActivity() as HomeActivity).dialogLoading?.show()
                 }
                 is ResultData.Success -> {
                     println("Success")
@@ -267,14 +247,10 @@ class MyNotesFragment @Inject constructor(
                     myNoteAdapter.myNotes = newList
 
 
-                    //binding.movieDetailLoading.makeGone()
-                    //binding.movieDetailContainer.makeVisible()
-
+                    (requireActivity() as HomeActivity).dialogLoading?.dismiss()
                 }
                 is ResultData.Exception -> {
-                    println("Exception")
-                    //binding.movieDetailLoading.makeGone()
-                    //binding.movieDetailContainer.makeVisible()
+                    (requireActivity() as HomeActivity).dialogLoading?.dismiss()
 
                 }
             }
@@ -290,14 +266,9 @@ class MyNotesFragment @Inject constructor(
         data.observe(viewLifecycleOwner) {
             when (it) {
                 is ResultData.Loading -> {
-                    println("loading")
-                    //binding.movieDetailContainer.makeInVisible()
-                    //binding.movieDetailLoading.makeVisible()
+                    (requireActivity() as HomeActivity).dialogLoading?.show()
                 }
                 is ResultData.Success -> {
-                    println("Success")
-                    println("data : ${it.data}")
-
                     if (it.data != null && it.data.isNotEmpty()) {
                         toolbarItems?.secondEndButton?.setImageDrawable(Util.getDrawable(R.drawable.ic_baseline_restore_from_trash_24,requireContext().theme))
                         toolbarItems?.secondEndButton?.makeVisible()
@@ -313,15 +284,10 @@ class MyNotesFragment @Inject constructor(
                         toolbarItems?.secondEndButton?.makeInVisible()
                     }
 
-                    //binding.movieDetailLoading.makeGone()
-                    //binding.movieDetailContainer.makeVisible()
-
+                    (requireActivity() as HomeActivity).dialogLoading?.dismiss()
                 }
                 is ResultData.Exception -> {
-                    println("Exception")
-                    //binding.movieDetailLoading.makeGone()
-                    //binding.movieDetailContainer.makeVisible()
-
+                    (requireActivity() as HomeActivity).dialogLoading?.dismiss()
                 }
             }
         }

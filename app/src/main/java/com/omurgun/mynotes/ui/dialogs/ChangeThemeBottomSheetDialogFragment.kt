@@ -26,7 +26,6 @@ class ChangeThemeBottomSheetDialogFragment : BottomSheetDialogFragment() {
         if (dialog != null) {
             dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog?.window?.setLayout(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.MATCH_PARENT)
-            //dialog?.setCancelable(false)
         }
     }
 
@@ -102,12 +101,7 @@ class ChangeThemeBottomSheetDialogFragment : BottomSheetDialogFragment() {
                 binding.positiveButton.isEnabled = false
             }
         }
-
-
-
     }
-
-
 
     override fun onDestroyView() {
         super.onDestroyView()

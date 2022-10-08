@@ -29,7 +29,6 @@ class ChangeNoteDeleteDayBottomSheetFragment : BottomSheetDialogFragment() {
         if (dialog != null) {
             dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog?.window?.setLayout(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.MATCH_PARENT)
-            //dialog?.setCancelable(false)
         }
     }
 

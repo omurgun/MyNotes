@@ -1,13 +1,17 @@
 package com.omurgun.mynotes.ui.util
 
+import android.content.Context
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.icu.text.SimpleDateFormat
 import androidx.core.content.res.ResourcesCompat
+import com.omurgun.mynotes.R
 import com.omurgun.mynotes.data.models.internal.InternalDate
 import java.util.*
 
 object Util {
+
+    // UtilTest
 
     fun dateTimeFormatter(date : Date, pattern : String = "dd-MM-yyyy HH:mm:ss") : String {
         val simpleDateFormat = SimpleDateFormat(pattern, Locale.ENGLISH)
@@ -38,46 +42,72 @@ object Util {
         return internalDate
     }
 
-    fun getMonthString(month: Int) : String? {
+    fun getMonthString(month: Int,context: Context) : String? {
         when (month) {
             1 -> {
-                return "Ocak"
+                return context.getString(R.string.january)
             }
             2 -> {
-                return "Şubat"
+                return context.getString(R.string.february)
             }
             3 -> {
-                return "Mart"
+                return context.getString(R.string.march)
             }
             4 -> {
-                return "Nisan"
+                return context.getString(R.string.april)
             }
             5 -> {
-                return "Mayıs"
+                return context.getString(R.string.may)
             }
             6 -> {
-                return "Haziran"
+                return context.getString(R.string.june)
             }
             7 -> {
-                return "Temmuz"
+                return context.getString(R.string.july)
             }
             8 -> {
-                return "Ağustos"
+                return context.getString(R.string.august)
             }
             9 -> {
-                return "Eylül"
+                return context.getString(R.string.september)
             }
             10 -> {
-                return "Ekim"
+                return context.getString(R.string.october)
             }
             11 -> {
-                return "Kasım"
+                return context.getString(R.string.november)
             }
             12 -> {
-                return "Aralık"
+                return context.getString(R.string.december)
             }
             else -> return null
 
         }
+    }
+
+    fun getCustomDate(date: String,context: Context) : String? {
+        val today = smashDate(dateTimeFormatter(Date()))
+        val currentDate = smashDate(date)
+
+        if (today != null && currentDate != null) {
+            if (today.year == currentDate.year) {
+                return if (today.month == currentDate.month) {
+                    if (today.day == currentDate.day) {
+                        "${currentDate.hour} ${currentDate.minute}"
+                    } else if (Integer.parseInt(today.day) == Integer.parseInt(currentDate.day) + 1) {
+                        "${context.getString(R.string.yesterday)} ${currentDate.hour} ${currentDate.minute}"
+                    } else {
+                        "${currentDate.day} ${getMonthString(Integer.parseInt(currentDate.month),context) ?: ""}"
+                    }
+
+                } else {
+                    "${currentDate.day}  ${getMonthString(Integer.parseInt(currentDate.month),context) ?: ""}"
+                }
+            }
+            else {
+                return "${currentDate.day} ${currentDate.month} ${currentDate.year}"
+            }
+        }
+        return null
     }
 }

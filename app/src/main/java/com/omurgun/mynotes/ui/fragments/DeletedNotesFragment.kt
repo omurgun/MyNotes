@@ -165,9 +165,7 @@ class DeletedNotesFragment @Inject constructor(
         data.observe(viewLifecycleOwner) {
             when (it) {
                 is ResultData.Loading -> {
-                    println("loading")
-                    //binding.movieDetailContainer.makeInVisible()
-                    //binding.movieDetailLoading.makeVisible()
+                    (requireActivity() as HomeActivity).dialogLoading?.show()
                 }
                 is ResultData.Success -> {
                     println("Success")
@@ -215,15 +213,10 @@ class DeletedNotesFragment @Inject constructor(
 
 
                     }
-                    //binding.movieDetailLoading.makeGone()
-                    //binding.movieDetailContainer.makeVisible()
-
+                    (requireActivity() as HomeActivity).dialogLoading?.dismiss()
                 }
                 is ResultData.Exception -> {
-                    println("Exception")
-                    //binding.movieDetailLoading.makeGone()
-                    //binding.movieDetailContainer.makeVisible()
-
+                    (requireActivity() as HomeActivity).dialogLoading?.dismiss()
                 }
             }
         }
@@ -236,9 +229,7 @@ class DeletedNotesFragment @Inject constructor(
         data.observe(viewLifecycleOwner) {
             when (it) {
                 is ResultData.Loading -> {
-                    println("loading")
-                    //binding.movieDetailContainer.makeInVisible()
-                    //binding.movieDetailLoading.makeVisible()
+                    (requireActivity() as HomeActivity).dialogLoading?.show()
                 }
                 is ResultData.Success -> {
                     println("Success")
@@ -247,15 +238,10 @@ class DeletedNotesFragment @Inject constructor(
                     newList.remove(note)
                     deletedNoteAdapter.deletedNotes = newList
 
-                    //binding.movieDetailLoading.makeGone()
-                    //binding.movieDetailContainer.makeVisible()
-
+                    (requireActivity() as HomeActivity).dialogLoading?.dismiss()
                 }
                 is ResultData.Exception -> {
-                    println("Exception")
-                    //binding.movieDetailLoading.makeGone()
-                    //binding.movieDetailContainer.makeVisible()
-
+                    (requireActivity() as HomeActivity).dialogLoading?.dismiss()
                 }
             }
         }
@@ -268,9 +254,7 @@ class DeletedNotesFragment @Inject constructor(
         data.observe(viewLifecycleOwner) {
             when (it) {
                 is ResultData.Loading -> {
-                    println("loading")
-                    //binding.movieDetailContainer.makeInVisible()
-                    //binding.movieDetailLoading.makeVisible()
+                    (requireActivity() as HomeActivity).dialogLoading?.show()
                 }
                 is ResultData.Success -> {
                     println("Success")
@@ -281,15 +265,11 @@ class DeletedNotesFragment @Inject constructor(
                     deletedNoteAdapter.deletedNotes = newList
 
 
-                    //binding.movieDetailLoading.makeGone()
-                    //binding.movieDetailContainer.makeVisible()
-
+                    (requireActivity() as HomeActivity).dialogLoading?.dismiss()
                 }
                 is ResultData.Exception -> {
-                    println("Exception")
-                    //binding.movieDetailLoading.makeGone()
-                    //binding.movieDetailContainer.makeVisible()
 
+                    (requireActivity() as HomeActivity).dialogLoading?.dismiss()
                 }
             }
         }
@@ -302,9 +282,7 @@ class DeletedNotesFragment @Inject constructor(
         data.observe(viewLifecycleOwner) {
             when (it) {
                 is ResultData.Loading -> {
-                    println("loading")
-                    //binding.movieDetailContainer.makeInVisible()
-                    //binding.movieDetailLoading.makeVisible()
+                    (requireActivity() as HomeActivity).dialogLoading?.show()
                 }
                 is ResultData.Success -> {
                     println("Success")
@@ -313,15 +291,11 @@ class DeletedNotesFragment @Inject constructor(
                     findNavController().popBackStack()
 
 
-                    //binding.movieDetailLoading.makeGone()
-                    //binding.movieDetailContainer.makeVisible()
-
+                    (requireActivity() as HomeActivity).dialogLoading?.dismiss()
                 }
                 is ResultData.Exception -> {
-                    println("Exception")
-                    //binding.movieDetailLoading.makeGone()
-                    //binding.movieDetailContainer.makeVisible()
 
+                    (requireActivity() as HomeActivity).dialogLoading?.dismiss()
                 }
             }
         }
